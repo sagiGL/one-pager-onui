@@ -1,0 +1,427 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OnUI — Strategic Investor Brief</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F8F9FA;
+    --card: #FFFFFF;
+    --border: #E4E7EB;
+    --text-pure: #111111;
+    --text-body: #2D3135;
+    --text-muted: #62686F;
+    --accent: #E05375; /* OnUI Brand Accent */
+    --accent-light: #FDF2F4;
+    --shadow: 0 1px 3px rgba(0,0,0,0.02), 0 6px 20px rgba(0,0,0,0.03);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    background-color: var(--bg);
+    color: var(--text-body);
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    padding: 50px 20px;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.01em;
+  }
+
+  .wrapper {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* Bento Layout Architectures */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  
+  @media (max-width: 768px) {
+    .grid-2, .grid-3 { grid-template-columns: 1fr; gap: 16px; }
+  }
+
+  /* Structural Content Cards */
+  .panel {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: var(--shadow);
+  }
+  
+  .panel.hero-focus {
+    background: linear-gradient(180deg, #FFFFFF 0%, var(--accent-light) 100%);
+    border-color: rgba(224, 83, 117, 0.25);
+  }
+  
+  .tag-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  /* Branding Line */
+  .nav-banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 6px;
+  }
+  .brand-logo {
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--text-pure);
+  }
+  .brand-logo span { color: var(--accent); }
+  .status-pill {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-pure);
+    background: #EAECEF;
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+
+  /* Typography Sizing */
+  .display-pitch {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--text-pure);
+    letter-spacing: -0.02em;
+  }
+  
+  .editorial-statement {
+    font-size: 15px;
+    color: var(--text-pure);
+    line-height: 1.55;
+  }
+  .editorial-statement strong {
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  /* Architecture Diagram Canvas Styles */
+  .diagram-container {
+    width: 100%;
+    background: #FAFAFA;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px 24px;
+    margin-top: 20px;
+  }
+  
+  .svg-canvas {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Unified Animated Vector Streams */
+  .animated-stream-path {
+    stroke-dasharray: 6 4;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    animation: pipelineFlow 1s linear infinite;
+  }
+
+  @keyframes pipelineFlow {
+    to {
+      stroke-dashoffset: -20;
+    }
+  }
+
+  /* Market Performance Blocks */
+  .metric-headline {
+    font-size: 38px;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: var(--text-pure);
+    line-height: 1.1;
+    margin-bottom: 4px;
+  }
+  .metric-sub {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .metric-details {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    line-height: 1.45;
+  }
+
+  /* Feature Sets */
+  .structural-list {
+    list-style-type: disc;
+    padding-left: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .structural-list li {
+    font-size: 14px;
+    color: var(--text-body);
+    line-height: 1.5;
+  }
+
+  /* Corporate Profiles */
+  .profile-group {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .profile-row {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 16px;
+  }
+  .profile-name { font-size: 15px; font-weight: 700; color: var(--text-pure); }
+  .profile-role { font-size: 10px; font-weight: 700; color: var(--accent); text-transform: uppercase; margin-top: 2px; }
+  .profile-bio { font-size: 13.5px; color: var(--text-muted); line-height: 1.45; }
+
+  /* Traction Systems */
+  .traction-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .deal-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+  }
+  .deal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+  .deal-client { font-size: 14.5px; font-weight: 700; color: var(--text-pure); }
+  .deal-badge { 
+    font-size: 9px; 
+    font-weight: 700; 
+    color: var(--accent); 
+    background: var(--accent-light); 
+    padding: 3px 8px; 
+    border-radius: 4px; 
+    text-transform: uppercase;
+  }
+  .deal-memo { font-size: 13px; color: var(--text-muted); line-height: 1.45; }
+  
+  .traction-footnote {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-style: italic;
+    line-height: 1.4;
+  }
+
+  /* Pitch Brief Footer Elements */
+  .footer-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  .footer-row span { color: var(--text-pure); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+  
+  <div class="nav-banner">
+    <div class="brand-logo">on<span>UI</span></div>
+    <div class="status-pill">Seed Executive Briefing · 2026</div>
+  </div>
+
+  <div class="panel">
+    <span class="tag-label">The Mission</span>
+    <div class="display-pitch">
+      Personalization for how humans absorb the digital world.
+    </div>
+  </div>
+
+  <div class="panel">
+    <span class="tag-label">The Problem</span>
+    <div class="editorial-statement">
+      Every product ships experiences built for the average user out of last week's data. When it fits the person actually in front of you, that's luck — not design.
+    </div>
+  </div>
+
+  <div class="panel">
+    <span class="tag-label">The Solution</span>
+    <div class="editorial-statement">
+      OnUI reads user intent instantly and modifies frontend layouts in real time without code rewrites or engineering tickets. The product stays the same; the experience adapts.
+    </div>
+    
+    <div class="diagram-container">
+      <svg class="svg-canvas" viewBox="0 0 900 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+        
+        <rect x="15" y="25" width="230" height="155" rx="10" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1.5"/>
+        <text x="30" y="48" fill="#111111" font-family="Inter" font-size="12" font-weight="800" letter-spacing="-0.02em">YOUR PRODUCT</text>
+        <text x="135" y="48" fill="#888888" font-family="Inter" font-size="11" font-weight="400">(Example Form)</text>
+        
+        <rect x="30" y="66" width="95" height="22" rx="4" fill="#FFFFFF" stroke="#E5E7EB"/>
+        <text x="38" y="80" fill="#BBBBBB" font-family="Inter" font-size="10">Your text input</text>
+        <rect x="135" y="66" width="95" height="22" rx="4" fill="#FFFFFF" stroke="#E5E7EB"/>
+        
+        <rect x="30" y="102" width="200" height="34" rx="4" fill="#F9FAFB" stroke="#E5E7EB"/>
+        <text x="40" y="116" fill="#4B5563" font-family="Inter" font-size="9.5" font-weight="600">API: [Endpoint Data Layer]</text>
+        <text x="40" y="128" fill="#9CA3AF" font-family="Inter" font-size="8.5">User_Profile Attributes &amp; Metrics</text>
+        
+        <text x="130" y="208" fill="#62686F" font-family="Inter" font-size="11" font-weight="700" letter-spacing="0.04em" text-anchor="middle">API + UI COMPONENT LAYER</text>
+
+        <path class="animated-stream-path" d="M 245 80 C 285 80, 305 102.5, 350 102.5" stroke="#9CA3AF"/>
+        <path class="animated-stream-path" d="M 245 119 L 350 119" stroke="#9CA3AF"/>
+
+        <rect x="350" y="35" width="70" height="135" rx="35" fill="#FFFFFF" stroke="#E05375" stroke-width="2"/>
+        <rect x="354" y="39" width="62" height="127" rx="31" fill="#FDF2F4"/>
+        <text x="385" y="108" fill="#E05375" font-family="Inter" font-size="16" font-weight="800" text-anchor="middle">OnUI</text>
+        
+        <text x="385" y="208" fill="#111111" font-family="Inter" font-size="11" font-weight="700" letter-spacing="0.04em" text-anchor="middle">READS INTENT</text>
+
+        <path class="animated-stream-path" d="M 420 90 C 438 90, 444 54, 475 54" stroke="#E05375"/>
+        <path class="animated-stream-path" d="M 420 102.5 L 475 102.5" stroke="#E05375"/>
+        <path class="animated-stream-path" d="M 420 115 C 438 115, 444 151, 475 151" stroke="#E05375"/>
+
+        <polygon points="485,36 715,36 700,72 470,72" fill="#FDF2F4" stroke="#E05375" stroke-width="1"/>
+        <text x="590" y="58" fill="#2D3135" font-family="Inter" font-size="10.5" font-weight="600" text-anchor="middle">Personalized greeting + Complete Draft</text>
+
+        <polygon points="485,84.5 715,84.5 700,120.5 470,120.5" fill="#FDF2F4" stroke="#E05375" stroke-width="1"/>
+        <text x="590" y="106.5" fill="#2D3135" font-family="Inter" font-size="10.5" font-weight="600" text-anchor="middle">Suggested product list based on data</text>
+
+        <polygon points="485,133 715,133 700,169 470,169" fill="#FDF2F4" stroke="#E05375" stroke-width="1"/>
+        <text x="590" y="155" fill="#2D3135" font-family="Inter" font-size="10.5" font-weight="600" text-anchor="middle">Actionable summary + 'Confirm' prompt</text>
+
+        <text x="590" y="208" fill="#111111" font-family="Inter" font-size="11" font-weight="700" letter-spacing="0.04em" text-anchor="middle">SHAPED AROUND THE USER</text>
+
+        <path class="animated-stream-path" d="M 710 54 C 740 54, 750 100, 785 100" stroke="#E05375"/>
+        <path class="animated-stream-path" d="M 710 102.5 L 785 102.5" stroke="#E05375"/>
+        <path class="animated-stream-path" d="M 710 151 C 740 151, 750 112, 785 112" stroke="#E05375"/>
+
+        <g transform="translate(810, 80)">
+          <circle cx="25" cy="25" r="24" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+          <circle cx="25" cy="19" r="6.5" fill="#111111"/>
+          <path d="M 12 39 C 12 32, 17 30, 25 30 C 33 30, 38 32, 38 39" fill="#111111"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <div class="panel">
+    <span class="tag-label">Why Now</span>
+    <div class="editorial-statement">
+      Commoditized <strong>LLMs</strong> make reading and acting on unstructured user intent in real time incredibly cheap. The infrastructure is ready; the adaptive runtime abstraction layer is missing.
+    </div>
+  </div>
+
+  <div class="grid-3">
+    <div class="panel">
+      <div class="metric-headline">$45B</div>
+      <div class="metric-sub">Total Addressable Market</div>
+      <div class="metric-details">Global software application development sector. (Gartner)</div>
+    </div>
+    <div class="panel">
+      <div class="metric-headline">$223M</div>
+      <div class="metric-sub">Serviceable Market</div>
+      <div class="metric-details">Rapidly scaling US and Israeli SaaS companies within the $1M–$10M ARR segment.</div>
+    </div>
+    <div class="panel">
+      <div class="metric-headline">30-300</div>
+      <div class="metric-sub">The ICP Wedge</div>
+      <div class="metric-details">SaaS platforms scaling fast where product adaptation is gated directly by engineering overhead.</div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="panel">
+      <span class="tag-label">Business Model</span>
+      <ul class="structural-list">
+        <li><strong>B2B Subscription SaaS:</strong> Mapped directly per active product deployment.</li>
+        <li><strong>Usage Expansion:</strong> Added screens, active accounts, and functional roles systematically increase contract size and stack stickiness.</li>
+      </ul>
+    </div>
+    
+    <div class="panel hero-focus">
+      <span class="tag-label" style="color: var(--accent);">Defensibility &amp; Long-Term Vision</span>
+      <div style="font-size: 13.5px; line-height: 1.55;">
+        Every digital interaction generates structural intent data that we retain. Over time, OnUI builds the definitive multi-tenant dataset for cross-vertical layout preferences. <strong>The endgame: proprietary intent models that layout what users need before they explicitly request it.</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="panel">
+      <span class="tag-label">Leadership</span>
+      <div class="profile-group">
+        <div class="profile-row">
+          <div>
+            <div class="profile-name">Sagi Gleizer</div>
+            <div class="profile-role">CEO</div>
+          </div>
+          <div class="profile-bio">Principal SE at F5 and brandlight.ai. Prior B2C gaming founder.</div>
+        </div>
+        <div class="profile-row">
+          <div>
+            <div class="profile-name">Itay Mendelawy</div>
+            <div class="profile-role">CBO</div>
+          </div>
+          <div class="profile-bio">VP Product at Bit. Previously BlazeMeter, exited to CA Technologies at $100M.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <span class="tag-label">Early Traction</span>
+      <div class="traction-stack">
+        <div class="deal-card">
+          <div class="deal-header">
+            <div class="deal-client">Binat</div>
+            <div class="deal-badge">Intent to Pay</div>
+          </div>
+          <div class="deal-memo">Israel's premier systems integrator. Deploying OnUI to systematically eliminate costly frontend development cycles.</div>
+        </div>
+        
+        <div class="deal-card">
+          <div class="deal-header">
+            <div class="deal-client">Ichilov Hospital</div>
+            <div class="deal-badge">Intent to Pay</div>
+          </div>
+          <div class="deal-memo">AI Innovation Hub. Bypassing traditional internal IT layout bottlenecks over complex enterprise health data environments.</div>
+        </div>
+        
+        <div class="traction-footnote">
+          * Pre-revenue institutional velocity metrics tracking significantly ahead of traditional early benchmarks.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-row">
+    <div>onui.ai</div>
+    <div>The product stays. <span>The experience adapts.</span></div>
+  </div>
+
+</div>
+
+</body></html>
